@@ -2,7 +2,7 @@ import React from 'react';
 
 const Login = props => {
     return (
-        <form className= 'login' onSubmit={this.handleLoginSubmit}>
+        <form className= 'login' onSubmit={props.handleLoginSubmit}>
             <input type='text' name='loginUserName' value={props.loginUserName}
             placeholder='Username' onChange={props.handleInputChange}/>
             <input type='password' name='loginPassword' value={props.loginPassword}
