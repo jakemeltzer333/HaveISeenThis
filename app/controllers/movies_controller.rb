@@ -26,6 +26,12 @@ class MoviesController < ApiController
         end
     end
 
+    def destroy
+        @user = User.find_by(params[:user_id])
+        Movie.destroy(params[:id])
+        redirect_to movies_path
+    end
+
     private
     def movie_params
         params.require(:movie).permit(:title, :tagline, :synopsis, :poster, :genre, :runtime, :release_date)
