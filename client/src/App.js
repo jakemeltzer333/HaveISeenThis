@@ -53,6 +53,7 @@ class App extends Component {
           auth: Auth.isUserAuthenticated(),
           loginUserName: '',
           loginPassword: '',
+          shouldFireRedirect: true,
         })
       }
     }).catch(err => {
@@ -74,6 +75,7 @@ class App extends Component {
         Auth.authenticateToken(res.data.token);
         this.setState({
           auth: Auth.isUserAuthenticated(),
+          shouldFireRedirect: true,
         })
       }
     }).catch(err => {
@@ -109,32 +111,36 @@ class App extends Component {
     return (
       <Router>
       <div className="App">
-        <Header logoutUser = {this.logoutUser} />
-        <Route exact path = '/' component = {Home} />
-        <Route exact path = '/register' render={() => 
-        !this.state.auth ? (<Register auth= {this.state.auth}
-                            registerUserName = {this.state.registerUserName}
-                            registerPassword = {this.state.registerPassword}
-                            registerEmail = {this.state.registerEmail}
-                            registerName = {this.state.registerName}
-                            handleInputChange = {this.handleInputChange}
-                            handleRegisterSubmit = {this.handleRegisterSubmit} />
-                            ) : (
-                              < Redirect to='/profile' />
-                            )} />
-        <Route exact path = '/login' render={() => 
-        !this.state.auth ? (<Login auth= {this.state.auth}
+        <Header logoutUser={this.logoutUser} />
+        {/* <Route exact path='/' component ={Home} /> */}
+        <Route exact path='/register' render={() => 
+            
+              <Register auth= {this.state.auth}
+                registerUserName = {this.state.registerUserName}
+                registerPassword = {this.state.registerPassword}
+                registerEmail = {this.state.registerEmail}
+                registerName = {this.state.registerName}
+                handleInputChange = {this.handleInputChange}
+                handleRegisterSubmit = {this.handleRegisterSubmit} />
+                            
+                            
+                            } />
+        <Route exact path='/login' render={() => 
+            !this.state.auth ? (
+                              <Login auth= {this.state.auth}
                               loginUserName= {this.state.loginUserName}
                               loginPassword= {this.state.loginPassword}
                               handleInputChange= {this.handleInputChange}
-                              handleLoginSubmit= {this.handleLoginSubmit} />
-          ) : (
-            < Redirect to='/profile'/>
-          )}
+                              handleLoginSubmit= {this.handleLoginSubmit} 
+                              />
+                              ) : (
+                                < Redirect to='/profile'/>
+                              )}
         />
-         <Route exact path = '/profile' render={() => 
-         this.state.auth ? <Profile auth={this.state.auth} resetFireRedirect={this.resetFireRedirect} /> : <Redirect to="/login"/> 
+         <Route exact path ='/profile' render={() => 
+            this.state.auth ? <Profile auth={this.state.auth} resetFireRedirect={this.resetFireRedirect} /> : <Redirect to="/login"/> 
         } />
+        {this.state.shouldFireRedirect ? <Redirect push to={'/'} /> : ''}
       </div>
       </Router>
     );
