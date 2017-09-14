@@ -10,6 +10,11 @@ import {
 import axios from 'axios';
 
 import Auth from './modules/Auth';
+import Login from './components/Login';
+import Register from './components/Register';
+import Profile from './components/Profile';
+import Header from './components/Header';
+import Home from './components/Home';
 
 
 class App extends Component {
@@ -104,8 +109,21 @@ class App extends Component {
     return (
       <Router>
       <div className="App">
+        <Header logoutUser = {this.logoutUser} />
+        <Route exact path = '/' component = {Home} />
+        <Route exact path = '/register' render={() => 
+        !this.state.auth ? (<Register auth= {this.state.auth}
+                            registerUserName = {this.state.registerUserName}
+                            registerPassword = {this.state.registerPassword}
+                            registerEmail = {this.state.registerEmail}
+                            registerName = {this.state.registerName}
+                            handleInputChange = {this.handleInputChange}
+                            handleRegisterSubmit = {this.handleRegisterSubmit} />
+                            ) : (
+                              < Redirect to='/profile' />
+                            )} />
         <Route exact path = '/login' render={() => 
-        !this.state.auth ? (<LoginForm auth= {this.state.auth}
+        !this.state.auth ? (<Login auth= {this.state.auth}
                               loginUserName= {this.state.loginUserName}
                               loginPassword= {this.state.loginPassword}
                               handleInputChange= {this.handleInputChange}
