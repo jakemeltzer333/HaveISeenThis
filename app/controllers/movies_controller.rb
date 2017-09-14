@@ -19,10 +19,10 @@ class MoviesController < ApiController
         if movie.save
             render json: {
                 message: 'ok',
-                movie: movie,
+                movie: movie
             }
         else
-            render json: {message: 'Could not add movie'}
+            render json: {message: movie.errors.full_messages}
         end
     end
 
