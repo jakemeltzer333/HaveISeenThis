@@ -2,7 +2,7 @@ import React from 'react'
 
 const Register = props => {
     return (
-        <form className= 'register' onSubmit={this.handleRegisterSubmit}>
+        <form className= 'register' onSubmit={props.handleRegisterSubmit}>
             <input type='text' name='registerUserName' value={props.registerUserName}
             placeholder='Username' onChange={props.handleInputChange}/>
             <input type='password' name='registerPassword' value={props.registerPassword}
