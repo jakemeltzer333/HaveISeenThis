@@ -1,28 +1,18 @@
-    require 'uri'
-    require 'net/http'
 
     class MoviesController < ApiController
     before_action :require_login, except: [:index, :show]
     
     def index
-        @movie_key = Rails.application.secrets.api_key
-        url = URI("https://api.themoviedb.org/3/movie/top_rated?page=1&language=en-US&api_key=#{@movie_key}")
-        
-            http = Net::HTTP.new(url.host, url.port)
-            http.use_ssl = true
-            http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-        
-            request = Net::HTTP::Get.new(url)
-            request.body = "{}"
-        
-            response = http.request(request)
-        render json: response.read_body  
+        movie_key = Rails.application.secrets.api_key
+        response = HTTParty.get("https://api.themoviedb.org/3/movie/popular?page=1&language=en-US&api_key=#{movie_key}")    
+        render json: response  
     end
 
     def show
-        movie = Movie.find(params[:id])
-        movie_user = movie.user 
-        render json:{ movie: movie, username: movie_user.username}
+        movie_key = Rails.application.secrets.api_key
+        movie = params[:movieName]
+        response = HTTParty.get("https://api.themoviedb.org/3/search/movie?include_adult=false&page=1&query=#{movie}&language=en-US&api_key=#{movie_key}") 
+        render json: response
     end
 
     def create
