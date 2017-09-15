@@ -35,6 +35,8 @@ class App extends Component {
       movieName: '',
       searchResults: '',
       searchLoaded: false,
+      movieData: '',
+      movieDataLoaded: false,
     }
   }
 
@@ -125,7 +127,7 @@ class App extends Component {
 
   handleMovieSearch = (e) => {
     e.preventDefault();
-    axios('/search', {
+    axios('/movies', {
       method: 'POST',
       data: {
         movieName: this.state.movieName,
@@ -139,31 +141,45 @@ class App extends Component {
     })
   }
 
+  handleSingleMovie = (id) => {
+    axios(`/movies/${id}`, {
+      method: 'GET',
+      data: {
+        movieData: this.state.movieData,
+      }
+    }).then(res => {
+      console.log(res);
+      this.setState({
+        movieData: res.data,
+        movieDataLoaded: true,
+      })
+    })
+  }
+
   render() {
     return (
       <Router>
       <div className="App">
         <Header logoutUser={this.logoutUser} />
-        <Route exact path='/' render ={() => 
+        <Route exact path='/movies' render ={() => 
           <Home apiData={this.state.apiData} apiDataLoaded={this.state.apiDataLoaded} 
-                movieName={this.state.movieName} searchResults={this.state.searchResults} searchLoaded={this.state.searchLoaded} handleMovieSearch={this.handleMovieSearch} handleInputChange={this.handleInputChange}/>} 
-        />
-        <Route exact path='/search' render ={() =>
-          <SingleMovie apiData={this.state.apiData} apiDataLoaded={this.state.apiDataLoaded} 
-                      handleMovieSearch={this.handleMovieSearch} handleInputChange={this.handleInputChange}/>}
-        />  
+                movieName={this.state.movieName} searchResults={this.state.searchResults} searchLoaded={this.state.searchLoaded} 
+                handleMovieSearch={this.handleMovieSearch} handleInputChange={this.handleInputChange} handleSingleMovie={this.handleSingleMovie}/>} 
+          />
+        <Route exact path='/movies/id' render ={() =>
+          <SingleMovie apiData={this.state.apiData} apiDataLoaded={this.state.apiDataLoaded}
+                      movieData={this.state.movieData} movieDataLoaded={this.state.movieDataLoaded} 
+                      handleMovieSearch={this.handleMovieSearch} handleInputChange={this.handleInputChange} handleSingleMovie={this.handleSingleMovie} />}
+          />  
         <Route exact path='/register' render={() => 
-            
               <Register auth= {this.state.auth}
                 registerUserName = {this.state.registerUserName}
                 registerPassword = {this.state.registerPassword}
                 registerEmail = {this.state.registerEmail}
                 registerName = {this.state.registerName}
                 handleInputChange = {this.handleInputChange}
-                handleRegisterSubmit = {this.handleRegisterSubmit} />
-                            
-                            
-                            } />
+                handleRegisterSubmit = {this.handleRegisterSubmit} />              
+              } />
         <Route exact path='/login' render={() => 
             !this.state.auth ? (
                               <Login auth= {this.state.auth}
