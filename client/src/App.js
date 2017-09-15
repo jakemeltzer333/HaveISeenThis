@@ -29,7 +29,19 @@ class App extends Component {
       registerPassword: '',
       registerEmail: '',
       registerName: '',
+      apiData: null,
+      apiDataLoaded: false,
     }
+  }
+
+  componentDidMount() {
+    axios.get('/movies').then(res => {
+      console.log(res);
+      this.setState({
+        apiData: res.data,
+        apiDataLoaded: true,
+      })
+    }).catch(err => console.log(err));
   }
 
   handleInputChange = (e) => {
