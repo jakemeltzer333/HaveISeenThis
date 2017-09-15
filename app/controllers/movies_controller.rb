@@ -1,6 +1,6 @@
 
     class MoviesController < ApiController
-    before_action :require_login, except: [:index, :show]
+    before_action :require_login, except: [:index, :show, :search]
     
     def index
         movie_key = Rails.application.secrets.api_key
