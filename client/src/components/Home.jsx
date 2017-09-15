@@ -7,14 +7,14 @@ class Home extends Component {
    renderSearchedMovies() {
       if(this.props.searchLoaded) {
        return this.props.searchResults.map(searchedMovie => {
-        return <p>{searchedMovie.title}</p>})
+        return <p><Link to='/movie'>{searchedMovie.title}</Link></p>})
       }
     }  
 
    renderMoviesList() {
     if(this.props.apiDataLoaded) {
                 return this.props.apiData.map(movie => {
-                    return <p>{movie.title}</p>
+                    return <p><Link to='/movie'>{movie.title}</Link></p>
                 })
         } else {
             return <div><h3>Data Not Loading...</h3></div>
