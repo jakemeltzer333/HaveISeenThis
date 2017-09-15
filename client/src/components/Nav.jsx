@@ -15,6 +15,9 @@ const Nav = props => {
                     <Link to = '/register'>Register</Link>
                     </li> : ''}
                 {Auth.isUserAuthenticated() ? <li>
+                    <Link to = '/profile'>Profile</Link>
+                    </li> : ''}    
+                {Auth.isUserAuthenticated() ? <li>
                     <Link to = '/movies'>Seen Movies</Link>
                     </li> : ''}    
                 {Auth.isUserAuthenticated() ? <li>
