@@ -10,6 +10,13 @@
 
     def show
         movie_key = Rails.application.secrets.api_key
+        movie_id = params[:id]
+        response = HTTParty.get("https://api.themoviedb.org/3/movie/#{movie_id}?api_key={movie_key}") 
+        render json: response
+    end
+
+    def search
+        movie_key = Rails.application.secrets.api_key
         movie = params[:movieName]
         response = HTTParty.get("https://api.themoviedb.org/3/search/movie?include_adult=false&page=1&query=#{movie}&language=en-US&api_key=#{movie_key}") 
         render json: response
