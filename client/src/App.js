@@ -38,7 +38,7 @@ class App extends Component {
     axios.get('/movies').then(res => {
       console.log(res);
       this.setState({
-        apiData: res.data,
+        apiData: res.data.results,
         apiDataLoaded: true,
       })
     }).catch(err => console.log(err));
@@ -124,7 +124,8 @@ class App extends Component {
       <Router>
       <div className="App">
         <Header logoutUser={this.logoutUser} />
-        {/* <Route exact path='/' component ={Home} /> */}
+        <Route exact path='/' render ={() => 
+        <Home apiData={this.state.apiData} apiDataLoaded={this.state.apiDataLoaded} />} />
         <Route exact path='/register' render={() => 
             
               <Register auth= {this.state.auth}
