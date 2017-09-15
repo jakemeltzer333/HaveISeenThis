@@ -15,6 +15,7 @@ import Register from './components/Register';
 import Profile from './components/Profile';
 import Header from './components/Header';
 import Home from './components/Home';
+import SingleMovie from './components/SingleMovie';
 
 
 class App extends Component {
@@ -31,12 +32,15 @@ class App extends Component {
       registerName: '',
       apiData: null,
       apiDataLoaded: false,
+      movieName: '',
+      searchResults: '',
+      searchLoaded: false,
     }
   }
 
   componentDidMount() {
     axios.get('/movies').then(res => {
-      console.log(res);
+      console.log(res.data.results);
       this.setState({
         apiData: res.data.results,
         apiDataLoaded: true,
@@ -119,13 +123,35 @@ class App extends Component {
     })
   }
 
+  handleMovieSearch = (e) => {
+    e.preventDefault();
+    axios('/search', {
+      method: 'POST',
+      data: {
+        movieName: this.state.movieName,
+      }
+    }).then(res => {
+      console.log(res)
+      this.setState({
+        searchResults: res.data.results,
+        searchLoaded: true,
+      })
+    })
+  }
+
   render() {
     return (
       <Router>
       <div className="App">
         <Header logoutUser={this.logoutUser} />
         <Route exact path='/' render ={() => 
-        <Home apiData={this.state.apiData} apiDataLoaded={this.state.apiDataLoaded} />} />
+          <Home apiData={this.state.apiData} apiDataLoaded={this.state.apiDataLoaded} 
+                movieName={this.state.movieName} searchResults={this.state.searchResults} searchLoaded={this.state.searchLoaded} handleMovieSearch={this.handleMovieSearch} handleInputChange={this.handleInputChange}/>} 
+        />
+        <Route exact path='/search' render ={() =>
+          <SingleMovie apiData={this.state.apiData} apiDataLoaded={this.state.apiDataLoaded} 
+                      handleMovieSearch={this.handleMovieSearch} handleInputChange={this.handleInputChange}/>}
+        />  
         <Route exact path='/register' render={() => 
             
               <Register auth= {this.state.auth}
