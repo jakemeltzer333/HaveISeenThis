@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   post "/login" => "sessions#create"
   delete "/logout" => "sessions#destroy"
   get "/profile" => "users#profile"
-  post "/search" => "movies#search"
+  post "/movies" => "movies#search"
 
   resources :users
   resources :movies 
