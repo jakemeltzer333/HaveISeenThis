@@ -37,6 +37,7 @@ class App extends Component {
       searchLoaded: false,
       movieData: '',
       movieDataLoaded: false,
+      movieId: '',
     }
   }
 
@@ -141,17 +142,18 @@ class App extends Component {
     })
   }
 
-  handleSingleMovie = (id) => {
-    axios(`/movies/${id}`, {
+  handleSingleMovie = (movieId) => {
+    axios(`/movies/${movieId}`, {
       method: 'GET',
       data: {
-        movieData: this.state.movieData,
+        movieId: this.state.movieId,
       }
     }).then(res => {
       console.log(res);
       this.setState({
         movieData: res.data,
         movieDataLoaded: true,
+        movieId
       })
     })
   }
@@ -163,12 +165,12 @@ class App extends Component {
         <Header logoutUser={this.logoutUser} />
         <Route exact path='/movies' render ={() => 
           <Home apiData={this.state.apiData} apiDataLoaded={this.state.apiDataLoaded} 
-                movieName={this.state.movieName} searchResults={this.state.searchResults} searchLoaded={this.state.searchLoaded} 
+                movieName={this.state.movieName} movieId={this.state.movieId} searchResults={this.state.searchResults} searchLoaded={this.state.searchLoaded} 
                 handleMovieSearch={this.handleMovieSearch} handleInputChange={this.handleInputChange} handleSingleMovie={this.handleSingleMovie}/>} 
           />
-        <Route exact path='/movies/id' render ={() =>
+        <Route exact path={`/movies/${this.state.id}`} render ={() =>
           <SingleMovie apiData={this.state.apiData} apiDataLoaded={this.state.apiDataLoaded}
-                      movieData={this.state.movieData} movieDataLoaded={this.state.movieDataLoaded} 
+                      movieName={this.state.movieName} movieData={this.state.movieData} movieDataLoaded={this.state.movieDataLoaded} 
                       handleMovieSearch={this.handleMovieSearch} handleInputChange={this.handleInputChange} handleSingleMovie={this.handleSingleMovie} />}
           />  
         <Route exact path='/register' render={() => 
