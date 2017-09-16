@@ -10,7 +10,7 @@ class Home extends Component {
         return (
            <div className='searched-movie-info'> 
             <h4><Link to={`/movies/${searchedMovie.id}`} 
-                onClick={() => {this.props.handleSingleMovie(this.props.searchedMovie.id)}}>{searchedMovie.title}</Link></h4>
+                onClick={() => {this.props.handleSingleMovie(searchedMovie.id)}}>{searchedMovie.title}</Link></h4>
             <p>Synopsis: {searchedMovie.overview}</p>
             <p>Release Date: {searchedMovie.release_date}</p>
            </div> 
@@ -25,7 +25,7 @@ class Home extends Component {
                     return (
                        <div className='popular-movie-info'> 
                         <h4><Link to={`/movies/${movie.id}`}
-                            onClick={() => {this.props.handleSingleMovie(this.props.movie.id)}}>{movie.title}</Link></h4>
+                            onClick={() => {this.props.handleSingleMovie(movie.id)}}>{movie.title}</Link></h4>
                         <p>Synopsis: {movie.overview}</p>
                         <p>Release Date: {movie.release_date}</p>
                        </div> 
