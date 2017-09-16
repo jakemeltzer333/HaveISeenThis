@@ -9,7 +9,8 @@ class Home extends Component {
        return this.props.searchResults.map(searchedMovie => {
         return (
            <div className='searched-movie-info'> 
-            <h4><Link to={`/movies/${searchedMovie.id}`}>{searchedMovie.title}</Link></h4>
+            <h4><Link to={`/movies/${searchedMovie.id}`} 
+                onClick={() => {this.props.handleSingleMovie(this.props.searchedMovie.id)}}>{searchedMovie.title}</Link></h4>
             <p>Synopsis: {searchedMovie.overview}</p>
             <p>Release Date: {searchedMovie.release_date}</p>
            </div> 
@@ -23,7 +24,8 @@ class Home extends Component {
                 return this.props.apiData.map(movie => {
                     return (
                        <div className='popular-movie-info'> 
-                        <h4><Link to={`/movies/${movie.id}`}>{movie.title}</Link></h4>
+                        <h4><Link to={`/movies/${movie.id}`}
+                            onClick={() => {this.props.handleSingleMovie(this.props.movie.id)}}>{movie.title}</Link></h4>
                         <p>Synopsis: {movie.overview}</p>
                         <p>Release Date: {movie.release_date}</p>
                        </div> 
