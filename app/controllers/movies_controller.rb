@@ -4,8 +4,9 @@
     
     def index
         movie_key = Rails.application.secrets.api_key
+        poster_response = HTTParty.get("https://api.themoviedb.org/3/configuration?api_key=#{movie_key}")
         response = HTTParty.get("https://api.themoviedb.org/3/movie/popular?page=1&language=en-US&api_key=#{movie_key}")    
-        render json: response  
+        render json: {response: response, poster_response: poster_response} 
     end
 
     def show
@@ -18,8 +19,9 @@
     def search
         movie_key = Rails.application.secrets.api_key
         movie = params[:movieName]
+        poster_response = HTTParty.get("https://api.themoviedb.org/3/configuration?api_key=#{movie_key}")
         response = HTTParty.get("https://api.themoviedb.org/3/search/movie?include_adult=false&page=1&query=#{movie}&language=en-US&api_key=#{movie_key}") 
-        render json: response
+        render json: { response: response, poster_response: poster_response }
     end
 
     def create

@@ -44,10 +44,13 @@ class App extends Component {
 
   componentDidMount() {
     axios.get('/movies').then(res => {
-      console.log(res.data.results);
+      console.log(res.data)
+      console.log(res.data.response);
+      console.log(res.data.poster_response.images);
       this.setState({
-        apiData: res.data.results,
+        apiData: res.data.response.results,
         apiDataLoaded: true,
+        posterResults: res.data.poster_response.images,
       })
     }).catch(err => console.log(err));
   }
@@ -138,7 +141,6 @@ class App extends Component {
       console.log(res)
       this.setState({
         searchResults: res.data.response.results,
-        posterResults: res.data.poster_response.images,
         searchLoaded: true,
       })
     })
@@ -179,7 +181,8 @@ class App extends Component {
                        apiDataLoaded={this.state.apiDataLoaded}
                        movieName={this.state.movieName} 
                        movieData={this.state.movieData} 
-                       movieDataLoaded={this.state.movieDataLoaded} 
+                       movieDataLoaded={this.state.movieDataLoaded}
+                       posterResults={this.state.posterResults} 
                        handleMovieSearch={this.handleMovieSearch} 
                        handleInputChange={this.handleInputChange} 
                        handleSingleMovie={this.handleSingleMovie} />}
