@@ -7,7 +7,7 @@ const Nav = props => {
     return (
         <div className= 'nav'>
             <ul>
-                <li><Link to = '/'>Home</Link></li>
+                <li><Link to = '/movies'>Home</Link></li>
                 {!Auth.isUserAuthenticated() ? <li> 
                     <Link to = '/login'>Login</Link>
                 </li> : ''}
