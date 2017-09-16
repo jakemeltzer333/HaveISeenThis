@@ -11,7 +11,7 @@
     def show
         movie_key = Rails.application.secrets.api_key
         movie_id = params[:id]
-        response = HTTParty.get("https://api.themoviedb.org/3/movie/#{movie_id}?api_key={movie_key}") 
+        response = HTTParty.get("https://api.themoviedb.org/3/movie/#{movie_id}?api_key=#{movie_key}")
         render json: response
     end
 
