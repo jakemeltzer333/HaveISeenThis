@@ -35,9 +35,9 @@ class Home extends Component {
        return (
            <div className= 'movies-container'>
              <form className='movie-search' onSubmit={this.props.handleMovieSearch}>  
-               <input type='text' name='movieName' placeholder='Search for a Movie' 
+               <input className='input' type='text' name='movieName' placeholder='Search for a Movie' 
                  value={this.props.movieName} onChange={this.props.handleInputChange}/>
-               <input type='submit' value='Search' />
+               <input className='submit' type='submit' value='Search' />
              </form>  
                 {this.props.searchLoaded ? this.renderSearchedMovies() : this.renderMoviesList()}
             </div>
