@@ -2,24 +2,21 @@ import React, {Component} from 'react';
 
 import { Link } from 'react-router-dom';
 
+import SearchResult from './SearchResult.jsx'
+
 class Home extends Component {
-   
-   renderSearchedMovies() {
-      if(this.props.searchLoaded) {
-       return this.props.searchResults.map(searchedMovie => {
-        return (
-           <div className='searched-movie-info'> 
-            <h4><Link to={`/movies/${searchedMovie.id}`} 
-                onClick={() => {this.props.handleSingleMovie(searchedMovie.id)}}>{searchedMovie.title}</Link></h4>
-            <p>Synopsis: {searchedMovie.overview}</p>
-            <p>Release Date: {searchedMovie.release_date}</p>
-           </div> 
-            )}
-          )
-       }
+
+   renderSearchedMovies = () => {
+         if(this.props.searchLoaded) {
+             return this.props.searchResults.map(searchedMovie => {
+                 return (
+                     <SearchResult key={searchedMovie.id} posterResults={this.props.posterResults} searchedMovie={searchedMovie}/>
+                 )
+             })
+         }
     }  
 
-   renderMoviesList() {
+   renderMoviesList = () => {
     if(this.props.apiDataLoaded) {
                 return this.props.apiData.map(movie => {
                     return (
