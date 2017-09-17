@@ -1,5 +1,6 @@
 import React from 'react';
 import Auth from '../modules/Auth';
+import { Link } from 'react-router-dom';
 
 const SingleMovie = props => {
 
@@ -14,9 +15,13 @@ const SingleMovie = props => {
             <h1 className='movie-title'>{props.movieData.title}</h1>
             <h5 className='tagline'>Tagline: {props.movieData.tagline}</h5>
             <h5 className='synopsis-header'>Synopsis:</h5> <p className='synopsis'>{props.movieData.overview}</p>
+            <h5 className='genre'>Genre: {props.movieData.genres[0].name}</h5>
             <h5 className='runtime'>Runtime: {props.movieData.runtime} Minutes</h5>
             <h5 className='release-date'>Release Date: {props.movieData.release_date}</h5>
-            <i className="fa fa-check-circle fa-2x" aria-hidden="true"> Hey, I've Seen This Movie!</i>
+            {!Auth.isUserAuthenticated() ? 
+                <i className="fa fa-check-circle fa-2x" aria-hidden="true"><Link to = '/login'> Hey, I've Seen This Movie! </Link></i>
+                : <i className="fa fa-check-circle fa-2x" aria-hidden="true"><Link to='/seen_movies' 
+                        onClick={() => {props.handleSeenMovies}}> Hey, I've Seen This Movie!</Link></i>}
             {Auth.isUserAuthenticated() ? 
                 <i className="fa fa-times-circle fa-2x" aria-hidden="true"> Wait, No I Haven't! Remove This!</i>
                 : ''}
