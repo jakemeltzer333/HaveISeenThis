@@ -177,10 +177,7 @@ class App extends Component {
                 handleSingleMovie={this.handleSingleMovie}/>} 
           />
         <Route exact path={`/movies/${this.state.movieId}`} render ={() =>
-          <SingleMovie apiData={this.state.apiData} 
-                       apiDataLoaded={this.state.apiDataLoaded}
-                       movieName={this.state.movieName} 
-                       movieData={this.state.movieData} 
+          <SingleMovie movieData={this.state.movieData} 
                        movieDataLoaded={this.state.movieDataLoaded}
                        posterResults={this.state.posterResults} 
                        handleMovieSearch={this.handleMovieSearch} 
