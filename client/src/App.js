@@ -12,7 +12,7 @@ import axios from 'axios';
 import Auth from './modules/Auth';
 import Login from './components/Login';
 import Register from './components/Register';
-import Profile from './components/Profile';
+import SeenMovies from './components/SeenMovies';
 import Header from './components/Header';
 import Home from './components/Home';
 import SingleMovie from './components/SingleMovie';
@@ -39,12 +39,13 @@ class App extends Component {
       movieData: '',
       movieDataLoaded: false,
       movieId: '',
+      seenMovieData: '',
+      seenMovieDataLoaded: '',
     }
   }
 
   componentDidMount() {
     axios.get('/movies').then(res => {
-      console.log(res.data)
       console.log(res.data.response);
       console.log(res.data.poster_response.images);
       this.setState({
@@ -159,6 +160,21 @@ class App extends Component {
     })
   }
 
+  handleSeenMovies = (e) => {
+    e.preventDefault();
+    axios.post('/seen_movies', {
+      headers: {
+        'Authorization': `Token ${Auth.getToken()}`,
+        token: Auth.getToken(),
+      }
+    }).then(res => {
+      this.setState({
+        seenMovieData: res.data,
+        seenMovieDataLoaded: true,
+      })
+    })
+  }
+
   render() {
     return (
       <Router>
@@ -179,10 +195,9 @@ class App extends Component {
         <Route exact path={`/movies/${this.state.movieId}`} render ={() =>
           <SingleMovie movieData={this.state.movieData} 
                        movieDataLoaded={this.state.movieDataLoaded}
-                       posterResults={this.state.posterResults} 
-                       handleMovieSearch={this.handleMovieSearch} 
-                       handleInputChange={this.handleInputChange} 
-                       handleSingleMovie={this.handleSingleMovie} />}
+                       posterResults={this.state.posterResults}  
+                       handleSingleMovie={this.handleSingleMovie}
+                       handleSeenMovies={this.handleSeenMovies} />}
           />  
         <Route exact path='/register' render={() => 
               <Register auth= {this.state.auth}
@@ -202,11 +217,22 @@ class App extends Component {
                               handleLoginSubmit= {this.handleLoginSubmit} 
                               />
                               ) : (
-                                < Redirect to='/profile'/>
+                                < Redirect to='/movies'/>
                               )}
         />
-         <Route exact path ='/profile' render={() => 
-            this.state.auth ? <Profile auth={this.state.auth} resetFireRedirect={this.resetFireRedirect} /> : <Redirect to="/login"/> 
+         <Route exact path ='/seen_movies' render={() => 
+            this.state.auth ?
+                <SeenMovies auth={this.state.auth} 
+                  resetFireRedirect={this.resetFireRedirect} 
+                  seenMovieData={this.state.seenMovieData} 
+                  seenMovieDataLoaded={this.state.seenMovieDataLoaded}
+                  movieData={this.state.movieData} 
+                  movieDataLoaded={this.state.movieDataLoaded}
+                  movieId={this.state.movieId}
+                  posterResults={this.state.posterResults}
+                  handleSeenMovies={this.handleSeenMovies}
+                  handleSingleMovie={this.handleSingleMovie}
+                  /> : <Redirect to="/login"/> 
         } />
         {this.state.shouldFireRedirect ? <Redirect push to={'/'} /> : ''}
       </div>
