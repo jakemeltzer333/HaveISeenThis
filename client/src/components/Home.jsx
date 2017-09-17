@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 
-import { Link } from 'react-router-dom';
-
 import SearchResult from './SearchResult.jsx'
 import PopularMovie from './PopularMovie.jsx'
 
