@@ -217,7 +217,7 @@ class App extends Component {
                               handleLoginSubmit= {this.handleLoginSubmit} 
                               />
                               ) : (
-                                < Redirect to='/movies'/>
+                                < Redirect to='/'/>
                               )}
         />
          <Route exact path ='/seen_movies' render={() => 
