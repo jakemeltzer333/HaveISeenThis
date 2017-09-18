@@ -3,7 +3,8 @@
     before_action :require_login, except: [:index_search, :show_search, :search]
     
     def index
-        movies = current_user.movies.all
+        # movies = current_user.movies.all
+        movies = Movie.where(id: current_user.id)
         render json: { movies: movies }
     end
     
