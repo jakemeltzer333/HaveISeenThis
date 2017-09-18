@@ -11,7 +11,7 @@ const SearchResult = props => {
          
         return (
                  <div className='movie-poster-result'>
-                <Link to={`/movies/${props.searchedMovie.id}`} 
+                <Link to={`/movies/search/${props.searchedMovie.id}`} 
                     onClick={() => {props.handleSingleMovie(props.searchedMovie.id)}}><img className='search-poster' src={poster} alt ={props.searchedMovie.title}/></Link>
                  </div>    
              )
