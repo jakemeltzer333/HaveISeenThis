@@ -158,7 +158,7 @@ class App extends Component {
     axios.get(`/movies/search/${movieId}`, {
       
     }).then(res => {
-      console.log(res.data);
+      console.log(res.data.response);
       this.setState({
         movieData: res.data.response,
         movieDataLoaded: true,
@@ -186,8 +186,9 @@ class App extends Component {
         token: Auth.getToken(),
       }
     }).then(res => {
+      console.log(res.data.movie)
       this.setState({
-        seenMovieData: res.data.response,
+        seenMovieData: res.data.movie,
         seenMovieDataLoaded: true,
         shouldFireRedirect: true,
       })
@@ -239,7 +240,7 @@ class App extends Component {
                                 < Redirect to='/'/>
                               )}
         />
-         <Route exact path ='/seen_movies' render={() => 
+         <Route exact path ='/movies' render={() => 
             this.state.auth ?
                 <SeenMovies auth={this.state.auth} 
                   resetFireRedirect={this.resetFireRedirect} 
@@ -253,7 +254,7 @@ class App extends Component {
                   handleSingleMovie={this.handleSingleMovie}
                   /> : <Redirect to="/login"/> 
         } />
-        {this.state.shouldFireRedirect ? <Redirect push to={'/'} /> : ''}
+        {this.state.shouldFireRedirect ? <Redirect push to={'/movies'} /> : ''}
       </div>
       </Router>
     );
