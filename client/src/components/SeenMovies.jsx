@@ -1,20 +1,55 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-import { Link } from 'react-router-dom';
+import SingleSeenMovie from './SingleSeenMovie.jsx'
 
-const SeenMovies = props => {
+import Auth from '../modules/Auth';
 
-    let url= props.posterResults.secure_base_url
-    let imageSize= 'w185'
-    let posterPath= props.movieData.poster_path
-    let poster= `${url}${imageSize}${posterPath}`
+import axios from 'axios';
 
-    return (
-        <div className='seen-movies-container'>
-            <h1>You've Seen All These Movies!</h1>
-            <Link to = {`/movies/${props.movieData.id}`}><img className='seen-poster' src={poster} alt={props.seenMovieData.title}/></Link>
-        </div>    
-    )
+class SeenMovies extends Component {
+    constructor() {
+        super();
+        this.state = {
+            seenMovieData: '',
+            seenMovieDataLoaded: false,
+        }
+    }
+
+    componentDidMount() {
+        axios('/movies', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Token ${Auth.getToken()}`,
+                token: Auth.getToken(),
+            }
+        }).then(res => {
+            this.setState({
+                seenMovieData: res.data.movie,
+                seenMovieDataLoaded: true,
+            })
+        })
+    }
+
+    renderSeenMoviesList = () => {
+        if(this.props.seenMovieDataLoaded) {
+            return this.props.seenMovieData.map(seenMovie => {
+               return ( 
+                <SingleSeenMovie key={seenMovie.id} 
+                    seenMovie={seenMovie}
+                    posterResults={this.props.posterResults}
+                    handleSingleMovie={this.props.handleSingleMovie}/>
+               )     
+            })
+        }
+    }
+
+    render() {
+        return (
+            <div className='seen-movies-container'>
+                 {this.renderSeenMoviesList()}
+            </div>    
+        )
+    }
 }
 
 export default SeenMovies;
