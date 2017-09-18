@@ -6,10 +6,11 @@ Rails.application.routes.draw do
   post "/login" => "sessions#create"
   delete "/logout" => "sessions#destroy"
   get "/profile" => "users#profile"
-  post "/movies" => "movies#search"
+  get "/movies/search" => "movies#index_search"
+  put "/movies/search" => "movies#search"
+  get "/movies/search/:id" => "movies#show_search"
 
   resources :users
   resources :movies 
-  resources :seen_movies
   
 end
