@@ -7,6 +7,13 @@ import Auth from '../modules/Auth';
 import axios from 'axios';
 
 class SeenMovies extends Component {
+    constructor() {
+        super();
+        this.state = {
+            userMovieData: '',
+            userMovieDataLoaded: false,
+        }
+    }
 
     componentDidMount() {
         axios('/movies', {
@@ -16,19 +23,22 @@ class SeenMovies extends Component {
                 token: Auth.getToken(),
             }
         }).then(res => {
+            console.log(res.data.movies)
             this.setState({
-                seenMovieData: res.data.movie,
-                seenMovieDataLoaded: true,
+                userMovieData: res.data.movies,
+                userMovieDataLoaded: true,
             })
         })
     }
 
     renderSeenMoviesList = () => {
-        if(this.props.seenMovieDataLoaded) {
-            return this.props.seenMovieData.map(seenMovie => {
+        if(this.state.userMovieDataLoaded) {
+            return this.state.userMovieData.map(seenMovie => {
                return ( 
                 <SingleSeenMovie key={seenMovie.id} 
                     seenMovie={seenMovie}
+                    userMovieData={this.state.userMovieData}
+                    userMovieDataLoaded={this.state.userMovieDataLoaded}
                     posterResults={this.props.posterResults}
                     handleSingleMovie={this.props.handleSingleMovie}/>
                )     
@@ -39,6 +49,7 @@ class SeenMovies extends Component {
     render() {
         return (
             <div className='seen-movies-container'>
+                <h1>You've Seen All These Movies!</h1>
                  {this.renderSeenMoviesList()}
             </div>    
         )
