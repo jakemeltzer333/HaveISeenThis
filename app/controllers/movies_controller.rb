@@ -57,6 +57,6 @@
 
     private
     def movie_params
-        params.require(:movie).permit(:title, :tagline, :synopsis, :poster, :genre, :runtime, :release_date)
+        params.require(:movie).permit(:api_id, :title, :tagline, :synopsis, :poster, :genre, :runtime, :release_date)
     end
 end
