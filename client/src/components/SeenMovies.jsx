@@ -7,13 +7,6 @@ import Auth from '../modules/Auth';
 import axios from 'axios';
 
 class SeenMovies extends Component {
-    constructor() {
-        super();
-        this.state = {
-            seenMovieData: '',
-            seenMovieDataLoaded: false,
-        }
-    }
 
     componentDidMount() {
         axios('/movies', {
