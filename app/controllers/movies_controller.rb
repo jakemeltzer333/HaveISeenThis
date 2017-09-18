@@ -4,7 +4,7 @@
     
     def index
         # movies = current_user.movies.all
-        movies = Movie.where(id: current_user.id)
+        movies = Movie.where(user_id: current_user.id)
         render json: { movies: movies }
     end
     
