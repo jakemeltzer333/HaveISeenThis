@@ -3,6 +3,7 @@ class User < ApplicationRecord
     has_secure_password
     has_secure_token :auth_token
 
+    has_many :seen_movies
     has_many :movies, through: :seen_movies
 
     def invalidate_token
