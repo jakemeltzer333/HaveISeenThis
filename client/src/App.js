@@ -38,6 +38,13 @@ class App extends Component {
       searchLoaded: false,
       movieData: '',
       movieDataLoaded: false,
+      title: '',
+      tagline: '',
+      synopsis: '',
+      poster: '',
+      genre: '',
+      runtime: '',
+      release_date: '',
       movieId: '',
       seenMovieData: '',
       seenMovieDataLoaded: '',
@@ -45,7 +52,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    axios.get('/movies').then(res => {
+    axios.get('/movies/search').then(res => {
       console.log(res.data.response);
       console.log(res.data.poster_response.images);
       this.setState({
@@ -133,8 +140,8 @@ class App extends Component {
 
   handleMovieSearch = (e) => {
     e.preventDefault();
-    axios('/movies', {
-      method: 'POST',
+    axios('/movies/search', {
+      method: 'PUT',
       data: {
         movieName: this.state.movieName,
       }
@@ -148,29 +155,41 @@ class App extends Component {
   }
 
   handleSingleMovie = (movieId) => {
-    axios.get(`/movies/${movieId}`, {
+    axios.get(`/movies/search/${movieId}`, {
       
     }).then(res => {
       console.log(res.data);
       this.setState({
-        movieData: res.data,
+        movieData: res.data.response,
         movieDataLoaded: true,
-        movieId: res.data.id
+        movieId: res.data.response.id,
+
       })
     })
   }
 
-  handleSeenMovies = (e) => {
-    e.preventDefault();
-    axios.post('/seen_movies', {
+  handleSeenMovies = () => {
+    axios('/movies', {
+      method: 'POST',
+      data: {
+        movie: {title: this.state.movieData.title,
+                tagline: this.state.movieData.tagline,
+                synopsis: this.state.movieData.overview,
+                poster: this.state.movieData.poster_path,
+                genre: this.state.movieData.genres[0].name,
+                runtime: this.state.movieData.runtime,
+                release_date: this.state.movieData.release_date
+              }
+      },
       headers: {
         'Authorization': `Token ${Auth.getToken()}`,
         token: Auth.getToken(),
       }
     }).then(res => {
       this.setState({
-        seenMovieData: res.data,
+        seenMovieData: res.data.response,
         seenMovieDataLoaded: true,
+        shouldFireRedirect: true,
       })
     })
   }
@@ -192,7 +211,7 @@ class App extends Component {
                 handleInputChange={this.handleInputChange} 
                 handleSingleMovie={this.handleSingleMovie}/>} 
           />
-        <Route exact path={`/movies/${this.state.movieId}`} render ={() =>
+        <Route exact path={`/movies/search/${this.state.movieId}`} render ={() =>
           <SingleMovie movieData={this.state.movieData} 
                        movieDataLoaded={this.state.movieDataLoaded}
                        posterResults={this.state.posterResults}  
