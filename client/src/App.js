@@ -16,6 +16,7 @@ import SeenMovies from './components/SeenMovies';
 import Header from './components/Header';
 import Home from './components/Home';
 import SingleMovie from './components/SingleMovie';
+import Footer from './components/Footer';
 
 
 class App extends Component {
@@ -279,6 +280,7 @@ class App extends Component {
                   deleteSeenMovie={this.deleteSeenMovie}
                   /> : <Redirect to="/login"/> 
         } />
+        <Footer />
         {this.state.shouldFireRedirect ? <Redirect push to={'/'} /> : ''}
       </div>
       </Router>
