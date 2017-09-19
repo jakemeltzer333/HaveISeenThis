@@ -38,23 +38,23 @@ class App extends Component {
       searchLoaded: false,
       movieData: '',
       movieDataLoaded: false,
-      // api_id: '',
-      // title: '',
-      // tagline: '',
-      // synopsis: '',
-      // poster: '',
-      // genre: '',
-      // runtime: '',
-      // release_date: '',
       movieId: '',
       seenMovieData: '',
       seenMovieDataLoaded: '',
     }
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
+    this.handleRegisterSubmit = this.handleRegisterSubmit.bind(this)
+    this.resetFireRedirect = this.resetFireRedirect.bind(this);
+    this.logoutUser = this.logoutUser.bind(this);
+    this.handleMovieSearch = this.handleMovieSearch.bind(this);
+    this.handleSingleMovie = this.handleSingleMovie.bind(this);
+    this.handleSeenMovies = this.handleSeenMovies.bind(this);
   }
 
   componentDidMount() {
     axios.get('/movies/search').then(res => {
-      console.log(res.data.response);
+      console.log(res.data.response.results);
       console.log(res.data.poster_response.images);
       this.setState({
         apiData: res.data.response.results,
@@ -64,7 +64,7 @@ class App extends Component {
     }).catch(err => console.log(err));
   }
 
-  handleInputChange = (e) => {
+  handleInputChange(e) {
     const name = e.target.name;
     const value = e.target.value;
     this.setState({
@@ -72,7 +72,7 @@ class App extends Component {
     });
   }
 
-  handleLoginSubmit = (e) => {
+  handleLoginSubmit(e) {
     e.preventDefault();
     axios.post('/login', {
       username: this.state.loginUserName,
@@ -93,7 +93,7 @@ class App extends Component {
     })
   }
 
-  handleRegisterSubmit = (e) => {
+  handleRegisterSubmit(e) {
     e.preventDefault();
     axios.post('/users', {
       user: {
@@ -115,7 +115,7 @@ class App extends Component {
     })
   }
 
-  resetFireRedirect = () => {
+  resetFireRedirect() {
     if (this.state.shouldFireRedirect) {
       this.setState({
         shouldFireRedirect: false,
@@ -123,7 +123,7 @@ class App extends Component {
     }
   }
 
-  logoutUser = () => {
+  logoutUser() {
     axios.delete('/logout', {
       headers: {
         'Authorization': `Token ${Auth.getToken()}`,
@@ -139,7 +139,7 @@ class App extends Component {
     })
   }
 
-  handleMovieSearch = (e) => {
+  handleMovieSearch(e) {
     e.preventDefault();
     axios('/movies/search', {
       method: 'PUT',
@@ -155,7 +155,7 @@ class App extends Component {
     })
   }
 
-  handleSingleMovie = (movieId) => {
+  handleSingleMovie(movieId) {
     axios.get(`/movies/search/${movieId}`, {
       
     }).then(res => {
@@ -169,7 +169,7 @@ class App extends Component {
     })
   }
 
-  handleSeenMovies = () => {
+  handleSeenMovies() {
     axios('/movies', {
       method: 'POST',
       data: {
@@ -178,7 +178,7 @@ class App extends Component {
           title: this.state.movieData.title,
           tagline: this.state.movieData.tagline,
           synopsis: this.state.movieData.overview,
-          poster: this.state.movieData.poster_path,
+          poster: this.state.movieData.poster,
           genre: this.state.movieData.genres[0].name,
           runtime: this.state.movieData.runtime,
           release_date: this.state.movieData.release_date
