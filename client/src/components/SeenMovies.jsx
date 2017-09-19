@@ -38,7 +38,6 @@ class SeenMovies extends Component {
                return ( 
                 <SingleSeenMovie key={seenMovie.id} 
                     seenMovie={seenMovie}
-                    seenPosterResults={this.state.seenPosterResults}
                     userMovieData={this.state.userMovieData}
                     userMovieDataLoaded={this.state.userMovieDataLoaded}
                     posterResults={this.props.posterResults}

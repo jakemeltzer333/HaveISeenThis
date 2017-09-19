@@ -6,8 +6,9 @@ const SingleSeenMovie = props => {
 
     let url= props.posterResults.secure_base_url
     let imageSize= 'w185'
-    let posterPath= props.userMovieData.poster
+    let posterPath= props.seenMovie.poster
     let poster= `${url}${imageSize}${posterPath}`
+    console.log(posterPath)
 
     return (
         <div className='seen-movies-container'>

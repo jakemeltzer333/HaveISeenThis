@@ -178,7 +178,7 @@ class App extends Component {
           title: this.state.movieData.title,
           tagline: this.state.movieData.tagline,
           synopsis: this.state.movieData.overview,
-          poster: this.state.movieData.poster,
+          poster: this.state.movieData.poster_path,
           genre: this.state.movieData.genres[0].name,
           runtime: this.state.movieData.runtime,
           release_date: this.state.movieData.release_date
