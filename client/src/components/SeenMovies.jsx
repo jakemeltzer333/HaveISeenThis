@@ -29,7 +29,7 @@ class SeenMovies extends Component {
                 userMovieData: res.data.movies,
                 userMovieDataLoaded: true,
             })
-        })
+        }).catch(err => console.log(err));
     }
 
     renderSeenMoviesList() {
