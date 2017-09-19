@@ -73,17 +73,34 @@
   align-items: center;
 }
 
-.popular-poster, .seen-poster, .search-poster {
+.popular-poster, .seen-poster, .search-poster, .single-poster {
   display: flex;
   flex-direction: row;
   padding: 10px;
   border: 2px, solid, #081c24;
+  font-family: "Shrikhand", cursive;
+  color: #081c24;
+  font-size: 25px;
 }
 
 .single-movie-container {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 20px;
+}
+
+.load {
+  font-size: 30px;
+  font-family: "Shrikhand", cursive;
+  color: #081c24;
+}
+
+.movie-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
 }
 
 .movie-title, .tagline, .synopsis-header, .genre, .runtime, .release-date, .seen-it {
@@ -93,6 +110,8 @@
 .movie-title, .tagline, .synopsis-header, .synopsis, .genre, .runtime, .release-date, .seen-it {
   color: white;
   font-family: "Shrikhand", cursive;
+  background-color: #081c24;
+  border: 2px solid #081c24;
 }
 
 .seen-movies-header {
@@ -101,13 +120,15 @@
   color: #081c24;
 }
 
-.delete-movie {
+.delete {
   display: flex;
   justify-content: center;
+  align-items: center;
+  align-content: center;
   opacity: 0;
 }
 
-.seen-movies-container:hover .delete-movie {
+.delete-movie:hover .delete {
   display: flex;
   justify-content: center;
   opacity: 1;
@@ -119,4 +140,5 @@
   color: #01d277;
   font-family: "Shrikhand", cursive;
   border-radius: 20px;
+  cursor: pointer;
 }
