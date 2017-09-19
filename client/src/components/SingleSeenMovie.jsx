@@ -8,7 +8,6 @@ const SingleSeenMovie = props => {
     let imageSize= 'w185'
     let posterPath= props.seenMovie.poster
     let poster= `${url}${imageSize}${posterPath}`
-    console.log(posterPath)
 
     return (
         <div className='seen-movies-container'>
