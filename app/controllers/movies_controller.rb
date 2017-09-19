@@ -2,12 +2,13 @@
     class MoviesController < ApiController
     before_action :require_login, except: [:index_search, :show_search, :search]
     
+    # renders user's seen movies
     def index
-        # movies = current_user.movies.all
         movies = Movie.where(user_id: current_user.id)
         render json: { movies: movies }
     end
     
+    # makes API call to render top rated movies upon initial page load
     def index_search
         movie_key = Rails.application.secrets.api_key
         poster_response = HTTParty.get("https://api.themoviedb.org/3/configuration?api_key=#{movie_key}")
@@ -20,6 +21,7 @@
         render json: { movie: movie }
     end
 
+    # makes API call to render info about individual movies
     def show_search
         movie_key = Rails.application.secrets.api_key
         movie_id = params[:id]
@@ -27,6 +29,7 @@
         render json: { response: response }
     end
 
+    # makes API call to return movie posters
     def search
         movie_key = Rails.application.secrets.api_key
         movie = params[:movieName]
@@ -34,7 +37,8 @@
         response = HTTParty.get("https://api.themoviedb.org/3/search/movie?include_adult=false&page=1&query=#{movie}&language=en-US&api_key=#{movie_key}") 
         render json: { response: response, poster_response: poster_response }
     end
-
+    
+    # adds seen movie to user's database of seen movies
     def create
         movie = Movie.new(movie_params)
         movie.user = current_user
@@ -48,7 +52,8 @@
             render json: {message: movie.errors.full_messages}
         end
     end
-
+    
+    # deletes seen movie from user's database of seen movies
     def destroy
         @user = User.find_by(params[:user_id])
         Movie.destroy(params[:id])
