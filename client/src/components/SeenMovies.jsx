@@ -50,7 +50,9 @@ class SeenMovies extends Component {
         return (
             <div className='seen-movies-container'>
                 <h1>You've Seen All These Movies!</h1>
+                <div className='poster-container'>
                  {this.renderSeenMoviesList()}
+                </div> 
             </div>    
         )
     }
