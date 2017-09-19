@@ -38,14 +38,14 @@ class App extends Component {
       searchLoaded: false,
       movieData: '',
       movieDataLoaded: false,
-      apiId: '',
-      title: '',
-      tagline: '',
-      synopsis: '',
-      poster: '',
-      genre: '',
-      runtime: '',
-      release_date: '',
+      // api_id: '',
+      // title: '',
+      // tagline: '',
+      // synopsis: '',
+      // poster: '',
+      // genre: '',
+      // runtime: '',
+      // release_date: '',
       movieId: '',
       seenMovieData: '',
       seenMovieDataLoaded: '',
@@ -174,7 +174,7 @@ class App extends Component {
       method: 'POST',
       data: {
         movie: {
-          apiId: this.state.movieData.id,
+          api_id: this.state.movieData.id,
           title: this.state.movieData.title,
           tagline: this.state.movieData.tagline,
           synopsis: this.state.movieData.overview,
@@ -257,7 +257,7 @@ class App extends Component {
                   handleSingleMovie={this.handleSingleMovie}
                   /> : <Redirect to="/login"/> 
         } />
-        {this.state.shouldFireRedirect ? <Redirect push to={'/movies'} /> : ''}
+        {this.state.shouldFireRedirect ? <Redirect push to={'/'} /> : ''}
       </div>
       </Router>
     );
