@@ -55,9 +55,13 @@
     
     # deletes seen movie from user's database of seen movies
     def destroy
-        @user = User.find_by(params[:user_id])
-        Movie.destroy(params[:id])
-        redirect_to movies_path
+        movie = params[:id]
+        Movie.where(user_id: current_user.id, id: movie).destroy_all
+        # if movie.destroy!
+        #     render json: {
+        #         message: 'ok'
+        #     }
+        # end
     end
 
     private
