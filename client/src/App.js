@@ -50,6 +50,7 @@ class App extends Component {
     this.handleMovieSearch = this.handleMovieSearch.bind(this);
     this.handleSingleMovie = this.handleSingleMovie.bind(this);
     this.handleSeenMovies = this.handleSeenMovies.bind(this);
+    this.deleteSeenMovie = this.deleteSeenMovie.bind(this);
   }
 
   componentDidMount() {
@@ -198,6 +199,21 @@ class App extends Component {
     })
   }
 
+  deleteSeenMovie(id) {
+    axios.delete(`/movies/${id}`)
+      .then(res=> {
+        const deletedSeenMovieData = [...this.state.seenMovieData]
+        for (let i = 0; i < deletedSeenMovieData.length; i++) {
+          if(deletedSeenMovieData[i].id === id) {
+            deletedSeenMovieData.splice(i, 1);
+          }
+        }
+        this.setState({
+          seenMovieData: deletedSeenMovieData,
+        })
+      })
+  }
+
   render() {
     return (
       <Router>
@@ -220,7 +236,8 @@ class App extends Component {
                        movieDataLoaded={this.state.movieDataLoaded}
                        posterResults={this.state.posterResults}  
                        handleSingleMovie={this.handleSingleMovie}
-                       handleSeenMovies={this.handleSeenMovies} />}
+                       handleSeenMovies={this.handleSeenMovies}
+                       deleteSeenMovie={this.deleteSeenMovie} />}
           />  
         <Route exact path='/register' render={() => 
               <Register auth= {this.state.auth}
