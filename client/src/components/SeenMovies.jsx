@@ -41,7 +41,8 @@ class SeenMovies extends Component {
                     userMovieData={this.state.userMovieData}
                     userMovieDataLoaded={this.state.userMovieDataLoaded}
                     posterResults={this.props.posterResults}
-                    handleSingleMovie={this.props.handleSingleMovie}/>
+                    handleSingleMovie={this.props.handleSingleMovie}
+                    deleteSeenMovie={this.props.deleteSeenMovie}/>
                )     
             })
         }
@@ -50,7 +51,7 @@ class SeenMovies extends Component {
     render() {
         return (
             <div className='seen-movies-container'>
-                <h1>You've Seen All These Movies!</h1>
+                <h1 className='seen-movies-header'>You've Seen All These Movies!</h1>
                 <div className='posters-container'>
                  {this.renderSeenMoviesList()}
                 </div> 
