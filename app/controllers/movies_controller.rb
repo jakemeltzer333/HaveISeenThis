@@ -10,7 +10,7 @@
     
     # makes API call to render top rated movies upon initial page load
     def index_search
-        movie_key = Rails.application.secrets.api_key
+        movie_key = Rails.application.secrets.api_key || ENV['api_key']
         poster_response = HTTParty.get("https://api.themoviedb.org/3/configuration?api_key=#{movie_key}")
         response = HTTParty.get("https://api.themoviedb.org/3/movie/now_playing?api_key=#{movie_key}&language=en-US&page=1")    
         render json: {response: response, poster_response: poster_response} 
@@ -23,7 +23,7 @@
 
     # makes API call to render info about individual movies
     def show_search
-        movie_key = Rails.application.secrets.api_key
+        movie_key = Rails.application.secrets.api_key || ENV['api_key']
         movie_id = params[:id]
         response = HTTParty.get("https://api.themoviedb.org/3/movie/#{movie_id}?api_key=#{movie_key}")
         render json: { response: response }
@@ -31,7 +31,7 @@
 
     # makes API call to return movie posters
     def search
-        movie_key = Rails.application.secrets.api_key
+        movie_key = Rails.application.secrets.api_key || ENV['api_key']
         movie = params[:movieName]
         poster_response = HTTParty.get("https://api.themoviedb.org/3/configuration?api_key=#{movie_key}")
         response = HTTParty.get("https://api.themoviedb.org/3/search/movie?include_adult=false&page=1&query=#{movie}&language=en-US&api_key=#{movie_key}") 
@@ -57,11 +57,6 @@
     def destroy
         movie = params[:id]
         Movie.where(user_id: current_user.id, id: movie).destroy_all
-        # if movie.destroy!
-        #     render json: {
-        #         message: 'ok'
-        #     }
-        # end
     end
 
     private
