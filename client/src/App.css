@@ -41,7 +41,7 @@
   align-items: center;
 }
 
-.popular-poster {
+.popular-poster, .seen-poster {
   display: flex;
   flex-direction: row;
   padding: 10px;
