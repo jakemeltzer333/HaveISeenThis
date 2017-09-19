@@ -13,6 +13,7 @@ class SeenMovies extends Component {
             userMovieData: '',
             userMovieDataLoaded: false,
         }
+        this.renderSeenMoviesList = this.renderSeenMoviesList.bind(this);
     }
 
     componentDidMount() {
@@ -31,12 +32,13 @@ class SeenMovies extends Component {
         })
     }
 
-    renderSeenMoviesList = () => {
+    renderSeenMoviesList() {
         if(this.state.userMovieDataLoaded) {
             return this.state.userMovieData.map(seenMovie => {
                return ( 
                 <SingleSeenMovie key={seenMovie.id} 
                     seenMovie={seenMovie}
+                    seenPosterResults={this.state.seenPosterResults}
                     userMovieData={this.state.userMovieData}
                     userMovieDataLoaded={this.state.userMovieDataLoaded}
                     posterResults={this.props.posterResults}
