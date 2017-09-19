@@ -10,12 +10,7 @@ const SingleMovie = props => {
     let poster= `${url}${imageSize}${posterPath}`
 
     return (
-        <div className='single-movie-container'>
-            <form className='movie-search' onSubmit={props.handleMovieSearch}>  
-               <input className='input' type='text' name='movieName' placeholder='Search for a Movie' 
-                 value={props.movieName} onChange={props.handleInputChange}/>
-               <input className='submit' type='submit' value='Search' />
-            </form> 
+        <div className='single-movie-container'> 
             <img className='single-poster' src={poster} alt=''/>
            <div className='movie-info'> 
             <h1 className='movie-title'>{props.movieData.title}</h1>
@@ -28,6 +23,7 @@ const SingleMovie = props => {
                 <i className="fa fa-check-circle fa-lg" aria-hidden="true"><Link to = '/login'> <h4 className='seen-it'>Hey, I've Seen This Movie!</h4> </Link></i>
                 : <i className="fa fa-check-circle fa-lg" aria-hidden="true"><Link to='/movies' 
                         onClick={() => props.handleSeenMovies()}> <h4 className='seen-it'>Hey, I've Seen This Movie!</h4></Link></i>}
+           </div>     
         </div>    
     )
 }
