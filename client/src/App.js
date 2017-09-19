@@ -38,6 +38,7 @@ class App extends Component {
       searchLoaded: false,
       movieData: '',
       movieDataLoaded: false,
+      apiId: '',
       title: '',
       tagline: '',
       synopsis: '',
@@ -173,6 +174,7 @@ class App extends Component {
       method: 'POST',
       data: {
         movie: {
+          apiId: this.state.movieData.id,
           title: this.state.movieData.title,
           tagline: this.state.movieData.tagline,
           synopsis: this.state.movieData.overview,
