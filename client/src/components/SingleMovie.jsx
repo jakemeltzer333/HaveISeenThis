@@ -22,9 +22,6 @@ const SingleMovie = props => {
                 <i className="fa fa-check-circle fa-2x" aria-hidden="true"><Link to = '/login'> Hey, I've Seen This Movie! </Link></i>
                 : <i className="fa fa-check-circle fa-2x" aria-hidden="true"><Link to='/movies' 
                         onClick={() => props.handleSeenMovies()}> Hey, I've Seen This Movie!</Link></i>}
-            {Auth.isUserAuthenticated() ? 
-                <i className="fa fa-times-circle fa-2x" aria-hidden="true"> Wait, No I Haven't! Remove This!</i>
-                : ''}
         </div>    
     )
 }
