@@ -39,8 +39,8 @@
   font-size: 20px;
 }
 
-.nav-item:hover {
-  background-color: #01d277;
+.nav a {
+  color: #01d277;
 }
 
 .movies-container, .seen-movies-container, .single-movie-container {
@@ -110,8 +110,12 @@
 .movie-title, .tagline, .synopsis-header, .synopsis, .genre, .runtime, .release-date, .seen-it {
   color: white;
   font-family: "Shrikhand", cursive;
-  background-color: #081c24;
+  background-color:#081c24; 
   border: 2px solid #081c24;
+}
+
+.seen-movie {
+  display: inline;
 }
 
 .seen-movies-header {
@@ -141,4 +145,9 @@
   font-family: "Shrikhand", cursive;
   border-radius: 20px;
   cursor: pointer;
+}
+
+.disclosure {
+  color: #01d277;
+  font-family: "Shrikhand", cursive;
 }
