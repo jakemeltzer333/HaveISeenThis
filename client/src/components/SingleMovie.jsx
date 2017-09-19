@@ -19,9 +19,9 @@ const SingleMovie = props => {
             <h5 className='runtime'>Runtime: {props.movieData.runtime} Minutes</h5>
             <h5 className='release-date'>Release Date: {props.movieData.release_date}</h5>
             {!Auth.isUserAuthenticated() ? 
-                <i className="fa fa-check-circle fa-2x" aria-hidden="true"><Link to = '/login'> Hey, I've Seen This Movie! </Link></i>
-                : <i className="fa fa-check-circle fa-2x" aria-hidden="true"><Link to='/movies' 
-                        onClick={() => props.handleSeenMovies()}> Hey, I've Seen This Movie!</Link></i>}
+                <i className="fa fa-check-circle fa-lg" aria-hidden="true"><Link to = '/login'> <h4 className='seen-it'>Hey, I've Seen This Movie!</h4> </Link></i>
+                : <i className="fa fa-check-circle fa-lg" aria-hidden="true"><Link to='/movies' 
+                        onClick={() => props.handleSeenMovies()}> <h4 className='seen-it'>Hey, I've Seen This Movie!</h4></Link></i>}
         </div>    
     )
 }
