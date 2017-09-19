@@ -242,6 +242,7 @@ class App extends Component {
                        posterResults={this.state.posterResults}  
                        handleSingleMovie={this.handleSingleMovie}
                        handleSeenMovies={this.handleSeenMovies}
+                       handleMovieSearch={this.handleMovieSearch}
                        deleteSeenMovie={this.deleteSeenMovie} />}
           />  
         <Route exact path='/register' render={() => 

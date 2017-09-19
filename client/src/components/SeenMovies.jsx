@@ -51,6 +51,11 @@ class SeenMovies extends Component {
     render() {
         return (
             <div className='seen-movies-container'>
+            <form className='movie-search' onSubmit={this.props.handleMovieSearch}>  
+               <input className='input' type='text' name='movieName' placeholder='Search for a Movie' 
+                 value={this.props.movieName} onChange={this.props.handleInputChange}/>
+               <input className='submit' type='submit' value='Search' />
+             </form> 
                 <h1 className='seen-movies-header'>You've Seen All These Movies!</h1>
                 <div className='posters-container'>
                  {this.renderSeenMoviesList()}

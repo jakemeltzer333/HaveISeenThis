@@ -11,7 +11,13 @@ const SingleMovie = props => {
 
     return (
         <div className='single-movie-container'>
+            <form className='movie-search' onSubmit={props.handleMovieSearch}>  
+               <input className='input' type='text' name='movieName' placeholder='Search for a Movie' 
+                 value={props.movieName} onChange={props.handleInputChange}/>
+               <input className='submit' type='submit' value='Search' />
+            </form> 
             <img className='single-poster' src={poster} alt=''/>
+           <div className='movie-info'> 
             <h1 className='movie-title'>{props.movieData.title}</h1>
             <h5 className='tagline'>Tagline: {props.movieData.tagline}</h5>
             <h5 className='synopsis-header'>Synopsis:</h5> <p className='synopsis'>{props.movieData.overview}</p>
