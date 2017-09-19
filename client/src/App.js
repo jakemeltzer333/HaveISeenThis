@@ -200,8 +200,13 @@ class App extends Component {
   }
 
   deleteSeenMovie(id) {
-    axios.delete(`/movies/${id}`)
-      .then(res=> {
+    console.log(id)
+    axios.delete(`/movies/${id}`, {
+      headers: {
+        'Authorization': `Token ${Auth.getToken()}`,
+        token: Auth.getToken(),
+        }
+      }).then(res=> {
         const deletedSeenMovieData = [...this.state.seenMovieData]
         for (let i = 0; i < deletedSeenMovieData.length; i++) {
           if(deletedSeenMovieData[i].id === id) {
@@ -263,15 +268,14 @@ class App extends Component {
          <Route exact path ='/movies' render={() => 
             this.state.auth ?
                 <SeenMovies auth={this.state.auth} 
-                  resetFireRedirect={this.resetFireRedirect} 
                   seenMovieData={this.state.seenMovieData} 
                   seenMovieDataLoaded={this.state.seenMovieDataLoaded}
                   movieData={this.state.movieData} 
                   movieDataLoaded={this.state.movieDataLoaded}
-                  movieId={this.state.movieId}
                   posterResults={this.state.posterResults}
                   handleSeenMovies={this.handleSeenMovies}
                   handleSingleMovie={this.handleSingleMovie}
+                  deleteSeenMovie={this.deleteSeenMovie}
                   /> : <Redirect to="/login"/> 
         } />
         {this.state.shouldFireRedirect ? <Redirect push to={'/'} /> : ''}
