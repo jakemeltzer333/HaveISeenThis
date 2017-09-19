@@ -12,7 +12,7 @@
     def index_search
         movie_key = Rails.application.secrets.api_key
         poster_response = HTTParty.get("https://api.themoviedb.org/3/configuration?api_key=#{movie_key}")
-        response = HTTParty.get("https://api.themoviedb.org/3/movie/top_rated?api_key=#{movie_key}&language=en-US&page=1")    
+        response = HTTParty.get("https://api.themoviedb.org/3/movie/now_playing?api_key=#{movie_key}&language=en-US&page=1")    
         render json: {response: response, poster_response: poster_response} 
     end
 
