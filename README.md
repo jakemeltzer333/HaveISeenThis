@@ -6,6 +6,17 @@ Over the years, my father has kept a running list of movies he has seen in an Ex
 
 [SeenIt?](https://have-i-seen-it.herokuapp.com/)
 
+## Screenshots
+
+#### Home Page
+![Home Page](./screenshots/seenithomescreen.png)
+
+#### Search Results
+![Search Results](./screenshots/moviesearch.png)
+
+#### Single View
+![Single View](./screenshots/singlemovieview.png)
+
 ## Technologies Used
 
 This app was built with Ruby on Rails for the backend and React for the front end and styled with CSS. To pull all the movie information, I used [The Movie Database API](https://developers.themoviedb.org/3/getting-started).
