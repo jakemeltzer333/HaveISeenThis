@@ -4,7 +4,7 @@ import SearchResult from './SearchResult.jsx'
 import PopularMovie from './PopularMovie.jsx'
 
 class Home extends Component {
-
+    //function to render poster images of movies that match the name searched in the input 
    renderSearchedMovies = () => {
          if(this.props.searchLoaded) {
              return this.props.searchResults.map(searchedMovie => {
@@ -15,7 +15,7 @@ class Home extends Component {
              })
          }
     }  
-
+    //function to render the initial list of poster images for the new movies  
    renderMoviesList = () => {
     if(this.props.apiDataLoaded) {
                 return this.props.apiData.map(movie => {

@@ -15,7 +15,7 @@ class SeenMovies extends Component {
         }
         this.renderSeenMoviesList = this.renderSeenMoviesList.bind(this);
     }
-
+    // renders poster images of all seen movies on page load. Can only happen if user is logged in
     componentDidMount() {
         axios('/movies', {
             method: 'GET',
@@ -31,7 +31,7 @@ class SeenMovies extends Component {
             })
         }).catch(err => console.log(err));
     }
-
+    //function to allow for each seen movie component to appear on the page 
     renderSeenMoviesList() {
         if(this.state.userMovieDataLoaded) {
             return this.state.userMovieData.map(seenMovie => {
