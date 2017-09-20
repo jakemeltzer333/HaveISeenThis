@@ -4,6 +4,8 @@
 
 Over the years, my father has kept a running list of movies he has seen in an Excel spreadsheet, and I always thought that was a good idea, but the way in which he did it was fairly stale. Inspired by that initial premise, I have set out to create a more visually dynamic method of keeping track of movies one has seen, with the ability to also pull up information about each specific movie with one click. Keep in mind this is the most basic version and will undergo further construction to add more features that will be elaborated on below.
 
+(SeenIt?)[https://have-i-seen-it.herokuapp.com/]
+
 ## Technologies Used
 
 This app was built with Ruby on Rails for the backend and React for the front end and styled with CSS. To pull all the movie information, I used (The Movie Database API)[https://developers.themoviedb.org/3/getting-started].
