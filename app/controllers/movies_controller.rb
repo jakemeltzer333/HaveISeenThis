@@ -8,7 +8,7 @@
         render json: { movies: movies }
     end
     
-    # makes API call to render top rated movies upon initial page load
+    # makes API call to render newly released movies upon initial page load
     def index_search
         movie_key = Rails.application.secrets.api_key || ENV['api_key']
         poster_response = HTTParty.get("https://api.themoviedb.org/3/configuration?api_key=#{movie_key}")

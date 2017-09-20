@@ -37,7 +37,59 @@ I wound up using three tables for this project, one for users, one for the movie
 | user_id     |
 | movie_id    |
 
-## How to use SeenIt?
+## Code Samples
+
+```javascript
+//allows user to save a movie to their seen movies and inserts it into the database 
+  handleSeenMovies() {
+    axios('/movies', {
+      method: 'POST',
+      data: {
+        movie: {
+          api_id: this.state.movieData.id,
+          title: this.state.movieData.title,
+          tagline: this.state.movieData.tagline,
+          synopsis: this.state.movieData.overview,
+          poster: this.state.movieData.poster_path,
+          genre: this.state.movieData.genres[0].name,
+          runtime: this.state.movieData.runtime,
+          release_date: this.state.movieData.release_date
+              }
+      },
+      headers: {
+        'Authorization': `Token ${Auth.getToken()}`,
+        token: Auth.getToken(),
+      }
+    }).then(res => {
+      console.log(res.data.movie)
+      this.setState({
+        seenMovieData: res.data.movie,
+        seenMovieDataLoaded: true,
+        shouldFireRedirect: true,
+      })
+    })
+  }
+```
+
+```ruby
+# makes API call to render newly released movies upon initial page load
+def index_search
+        movie_key = Rails.application.secrets.api_key || ENV['api_key']
+        poster_response = HTTParty.get("https://api.themoviedb.org/3/configuration?api_key=#{movie_key}")
+        response = HTTParty.get("https://api.themoviedb.org/3/movie/now_playing?api_key=#{movie_key}&language=en-US&page=1")    
+        render json: {response: response, poster_response: poster_response} 
+end
+
+ # makes API call to render info about individual movies
+    def show_search
+        movie_key = Rails.application.secrets.api_key || ENV['api_key']
+        movie_id = params[:id]
+        response = HTTParty.get("https://api.themoviedb.org/3/movie/#{movie_id}?api_key=#{movie_key}")
+        render json: { response: response }
+    end
+```
+
+## SeenIt? User Stories
 
 When the page loads, a user will see a list of 20 posters of recently released films. The user will be able to click on any of these posters and they will be directed to a page with information about that specific movie. Users can also search for a movie by typing the movie's name into the search input above the posters. On submit, a bunch of results will return with posters of both the movie you intended to search for and others with similar titles. For example, if the user wants to search for 'Star Wars' but only types in 'star', the search will return posters for every Star Wars movie but also for Star Trek movies.
 
