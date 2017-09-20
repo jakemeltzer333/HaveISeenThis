@@ -22,6 +22,7 @@ import Footer from './components/Footer';
 class App extends Component {
   constructor() {
     super();
+    //initial states 
     this.state = {
       auth: Auth.isUserAuthenticated(),
       shouldFireRedirect: false,
@@ -54,6 +55,7 @@ class App extends Component {
     this.deleteSeenMovie = this.deleteSeenMovie.bind(this);
   }
 
+  //renders the index_search api call from the backend and displays new movie posters 
   componentDidMount() {
     axios.get('/movies/search').then(res => {
       console.log(res.data.response.results);
@@ -66,6 +68,7 @@ class App extends Component {
     }).catch(err => console.log(err));
   }
 
+  //allows for user to type into the search input 
   handleInputChange(e) {
     const name = e.target.name;
     const value = e.target.value;
@@ -74,6 +77,7 @@ class App extends Component {
     });
   }
 
+  //allows users to be able to log in 
   handleLoginSubmit(e) {
     e.preventDefault();
     axios.post('/login', {
@@ -95,6 +99,7 @@ class App extends Component {
     })
   }
 
+  //allows users to be able to register 
   handleRegisterSubmit(e) {
     e.preventDefault();
     axios.post('/users', {
@@ -125,6 +130,7 @@ class App extends Component {
     }
   }
 
+  //allows user to log out
   logoutUser() {
     axios.delete('/logout', {
       headers: {
@@ -141,6 +147,8 @@ class App extends Component {
     })
   }
 
+  //when user inputs a movie's name, this method makes an api call to return posters for similar search
+  //results 
   handleMovieSearch(e) {
     e.preventDefault();
     axios('/movies/search', {
@@ -157,6 +165,8 @@ class App extends Component {
     })
   }
 
+  //when user clicks on a poster, this method directs user to movie's single page and renders 
+  //data pulled from api  
   handleSingleMovie(movieId) {
     axios.get(`/movies/search/${movieId}`, {
       
@@ -171,6 +181,7 @@ class App extends Component {
     })
   }
 
+  //allows user to save a movie to their seen movies and inserts it into the database 
   handleSeenMovies() {
     axios('/movies', {
       method: 'POST',
@@ -200,6 +211,7 @@ class App extends Component {
     })
   }
 
+  //user can delete a seen movie 
   deleteSeenMovie(id) {
     console.log(id)
     axios.delete(`/movies/${id}`, {
