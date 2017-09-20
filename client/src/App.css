@@ -103,7 +103,11 @@
   margin: 20px;
 }
 
-.movie-title, .tagline, .synopsis-header, .genre, .runtime, .release-date, .seen-it {
+.movie-title {
+  font-size: 35px;
+}
+
+.tagline, .synopsis-header, .genre, .runtime, .release-date, .seen-it {
   font-size: 20px;
 }
 
@@ -145,6 +149,17 @@
   font-family: "Shrikhand", cursive;
   border-radius: 20px;
   cursor: pointer;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.api-logo {
+  width: 150px;
+  margin-top: 15px;
 }
 
 .disclosure {
