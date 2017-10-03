@@ -253,10 +253,8 @@ class App extends Component {
           <SingleMovie movieData={this.state.movieData} 
                        movieDataLoaded={this.state.movieDataLoaded}
                        posterResults={this.state.posterResults}  
-                       handleSingleMovie={this.handleSingleMovie}
                        handleSeenMovies={this.handleSeenMovies}
-                       handleMovieSearch={this.handleMovieSearch}
-                       deleteSeenMovie={this.deleteSeenMovie} />}
+                        />}
           />  
         <Route exact path='/register' render={() => 
               <Register auth= {this.state.auth}
