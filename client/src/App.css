@@ -190,3 +190,9 @@
   color: #01d277;
   font-family: "Shrikhand", cursive;
 }
+
+@media screen and (max-width: 450px) {
+  .disclosure {
+    text-align: center;
+  }
+}
