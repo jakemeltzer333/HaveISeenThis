@@ -25,7 +25,7 @@ class Home extends Component {
                     )
                 })
         } else {
-            return <div><h3 className='load'>Data Not Loading...</h3></div>
+            return <div><h3 className='load'>Movies Loading...</h3></div>
         }
    }
     
