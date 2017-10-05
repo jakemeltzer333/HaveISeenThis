@@ -52,6 +52,7 @@ class SeenMovies extends Component {
       //user can delete a seen movie 
     deleteSeenMovie(id) {
         console.log(id)
+        console.log('Movie deleted')
         axios.delete(`/movies/${id}`, {
         headers: {
             'Authorization': `Token ${Auth.getToken()}`,
