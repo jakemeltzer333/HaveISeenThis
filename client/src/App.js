@@ -52,7 +52,6 @@ class App extends Component {
     this.handleMovieSearch = this.handleMovieSearch.bind(this);
     this.handleSingleMovie = this.handleSingleMovie.bind(this);
     this.handleSeenMovies = this.handleSeenMovies.bind(this);
-    this.deleteSeenMovie = this.deleteSeenMovie.bind(this);
   }
 
   //renders the index_search api call from the backend and displays new movie posters 
@@ -211,27 +210,6 @@ class App extends Component {
     })
   }
 
-  //user can delete a seen movie 
-  deleteSeenMovie(id) {
-    console.log(id)
-    axios.delete(`/movies/${id}`, {
-      headers: {
-        'Authorization': `Token ${Auth.getToken()}`,
-        token: Auth.getToken(),
-        }
-      }).then(res=> {
-        const deletedSeenMovieData = [...this.state.seenMovieData]
-        for (let i = 0; i < deletedSeenMovieData.length; i++) {
-          if(deletedSeenMovieData[i].id === id) {
-            deletedSeenMovieData.splice(i, 1);
-          }
-        }
-        this.setState({
-          seenMovieData: deletedSeenMovieData,
-        })
-      })
-  }
-
   render() {
     return (
       <Router>
@@ -287,7 +265,6 @@ class App extends Component {
                   posterResults={this.state.posterResults}
                   handleSeenMovies={this.handleSeenMovies}
                   handleSingleMovie={this.handleSingleMovie}
-                  deleteSeenMovie={this.deleteSeenMovie}
                   /> : <Redirect to="/login"/> 
         } />
         <Footer />

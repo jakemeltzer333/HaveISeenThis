@@ -14,6 +14,7 @@ class SeenMovies extends Component {
             userMovieDataLoaded: false,
         }
         this.renderSeenMoviesList = this.renderSeenMoviesList.bind(this);
+        this.deleteSeenMovie = this.deleteSeenMovie.bind(this);
     }
     // renders poster images of all seen movies on page load. Can only happen if user is logged in
     componentDidMount() {
@@ -42,10 +43,31 @@ class SeenMovies extends Component {
                     userMovieDataLoaded={this.state.userMovieDataLoaded}
                     posterResults={this.props.posterResults}
                     handleSingleMovie={this.props.handleSingleMovie}
-                    deleteSeenMovie={this.props.deleteSeenMovie}/>
+                    deleteSeenMovie={this.deleteSeenMovie}/>
                )     
             })
         }
+    }
+
+      //user can delete a seen movie 
+    deleteSeenMovie(id) {
+        console.log(id)
+        axios.delete(`/movies/${id}`, {
+        headers: {
+            'Authorization': `Token ${Auth.getToken()}`,
+            token: Auth.getToken(),
+            }
+        }).then(res=> {
+            const deletedSeenMovieData = [...this.state.userMovieData]
+            for (let i = 0; i < deletedSeenMovieData.length; i++) {
+            if(deletedSeenMovieData[i].id === id) {
+                deletedSeenMovieData.splice(i, 1);
+            }
+            }
+            this.setState({
+            userMovieData: deletedSeenMovieData,
+            })
+        })
     }
 
     render() {
