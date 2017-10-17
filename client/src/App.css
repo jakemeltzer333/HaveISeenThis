@@ -131,7 +131,16 @@
   font-size: 35px;
 }
 
-.tagline, .synopsis-header, .genre, .credits, .runtime, .release-date, .seen-it {
+.credits {
+  font-size: 28px;
+  text-align: center;
+}
+
+.cast, .crew {
+  font-size: 20px;
+}
+
+.tagline, .synopsis-header, .genre, .runtime, .release-date, .seen-it {
   font-size: 20px;
 }
 
