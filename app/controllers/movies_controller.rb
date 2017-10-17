@@ -26,7 +26,8 @@
         movie_key = Rails.application.secrets.api_key || ENV['api_key']
         movie_id = params[:id]
         response = HTTParty.get("https://api.themoviedb.org/3/movie/#{movie_id}?api_key=#{movie_key}")
-        render json: { response: response }
+        credits_response = HTTParty.get("https://api.themoviedb.org/3/movie/#{movie_id}/credits?api_key=#{movie_key}")
+        render json: { response: response, credits_response: credits_response }
     end
 
     # makes API call to return movie posters
