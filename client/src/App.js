@@ -41,6 +41,8 @@ class App extends Component {
       movieData: '',
       movieDataLoaded: false,
       movieId: '',
+      movieCreditsData: '',
+      movieCreditsDataLoaded: false,
       seenMovieData: '',
       seenMovieDataLoaded: '',
     }
@@ -171,11 +173,13 @@ class App extends Component {
       
     }).then(res => {
       console.log(res.data.response);
+      console.log(res.data.credits_response);
       this.setState({
         movieData: res.data.response,
         movieDataLoaded: true,
         movieId: res.data.response.id,
-
+        movieCreditsData: res.data.credits_response,
+        movieCreditsDataLoaded: true,
       })
     })
   }
@@ -230,7 +234,9 @@ class App extends Component {
         <Route exact path={`/movies/search/${this.state.movieId}`} render ={() =>
           <SingleMovie movieData={this.state.movieData} 
                        movieDataLoaded={this.state.movieDataLoaded}
-                       posterResults={this.state.posterResults}  
+                       posterResults={this.state.posterResults}
+                       movieCreditsData={this.state.movieCreditsData}
+                       movieCreditsDataLoaded={this.state.movieCreditsDataLoaded}  
                        handleSeenMovies={this.handleSeenMovies}
                         />}
           />  
