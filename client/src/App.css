@@ -131,11 +131,11 @@
   font-size: 35px;
 }
 
-.tagline, .synopsis-header, .genre, .runtime, .release-date, .seen-it {
+.tagline, .synopsis-header, .genre, .credits, .runtime, .release-date, .seen-it {
   font-size: 20px;
 }
 
-.movie-title, .tagline, .synopsis-header, .synopsis, .genre, .runtime, .release-date, .seen-it {
+.movie-title, .tagline, .synopsis-header, .synopsis, .credits, .genre, .runtime, .release-date, .seen-it {
   color: white;
   font-family: "Shrikhand", cursive;
   background-color:#081c24; 

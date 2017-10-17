@@ -1,26 +1,14 @@
 import React from 'react';
 import Auth from '../modules/Auth';
 import { Link } from 'react-router-dom';
-import Cast from './Cast.jsx';
+import Credits from './Credits.jsx';
 
 const SingleMovie = props => {
 
     let url= props.posterResults.secure_base_url
     let imageSize= 'w300'
     let posterPath= props.movieData.poster_path
-    let poster= `${url}${imageSize}${posterPath}`
-
-    // renderCastList = () => {
-    //     if(props.movieCreditsDataLoaded) {
-    //         return movieCreditsData.cast.map(actor => {
-    //             return (
-    //                 <div className='cast'>
-    //                     <p>{actor.name}</p>
-    //                 </div>    
-    //             )
-    //         })
-    //     }
-    // } 
+    let poster= `${url}${imageSize}${posterPath}` 
 
     return (
         <div className='single-movie-container'> 
@@ -29,7 +17,7 @@ const SingleMovie = props => {
             <h1 className='movie-title'>{props.movieData.title}</h1>
             <h5 className='tagline'>Tagline: {props.movieData.tagline}</h5>
             <h5 className='synopsis-header'>Synopsis:</h5> <p className='synopsis'>{props.movieData.overview}</p>
-            <h5 className='cast'>Cast: {props.movieCreditsData.cast[0].name}</h5>
+            <h5 className='credits'>Cast: <Credits key={props.movieCreditsData.id} movieCreditsData={props.movieCreditsData} movieCreditsDataLoaded={props.movieCreditsDataLoaded} /></h5>
             <h5 className='genre'>Genre: {props.movieData.genres[0].name}</h5>
             <h5 className='runtime'>Runtime: {props.movieData.runtime} Minutes</h5>
             <h5 className='release-date'>Release Date: {props.movieData.release_date}</h5>
