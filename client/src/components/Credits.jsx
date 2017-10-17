@@ -4,7 +4,6 @@ class Credits extends Component {
     renderCastList = () => {
         if(this.props.movieCreditsDataLoaded) {
             return this.props.movieCreditsData.cast.map(actor => {
-                console.log('this function works');
                 return (
                     <div className='cast'>
                         <p>{actor.name}: {actor.character}</p>
