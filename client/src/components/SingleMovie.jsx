@@ -25,8 +25,7 @@ const SingleMovie = props => {
             {!Auth.isUserAuthenticated() ? 
                 <i className="fa fa-check-circle fa-2x" aria-hidden="true"><Link to = '/login'> <h4 className='seen-it'>Hey, I've Seen This Movie!</h4> </Link></i>
                 : <i className="fa fa-check-circle fa-2x" aria-hidden="true"><Link to='/movies' 
-                        onClick={() => props.handleSeenMovies()}> <h4 className='seen-it'>Hey, I've Seen This Movie!</h4></Link></i>}
-                <h4 className='seen-it'>Date Added: <input className='input' type='date' /></h4>        
+                        onClick={() => props.handleSeenMovies()}> <h4 className='seen-it'>Hey, I've Seen This Movie!</h4></Link></i>}        
             </div>
         </div>     
         </div>    
